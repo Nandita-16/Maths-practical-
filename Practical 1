@@ -1,0 +1,30 @@
+import numpy as np
+NR = int(input("Enter the number of rows:"))
+NC = int(input("Enter the number of columns:"))
+
+print("Enter the entries in a single line (separated by space): ")
+
+entries = list(map(int, input().split()))
+
+matrix = np.array(entries).reshape(NR,NC)
+print("Matrix X is as follows:",'\n', matrix)
+
+print("Transpose of matrix X is as follows:",'\n',np.transpose(matrix))
+
+OUTPUT 
+Enter the number of rows:4
+Enter the number of columns:4
+Enter the entries in a single line (separated by space):
+7 8 10 20 9 10 5 6 4 3 5 7 4 1 2
+
+Matrix X is as follows:
+[[ 7  8 10 20]
+ [ 9 10  5  6]
+ [ 4  3  5  7]
+ [ 4  1  2  0]]
+
+Transpose of matrix X is as follows:
+[[ 7  9  4  4]
+ [ 8 10  3  1]
+ [10  5  5  2]
+ [20  6  7  0]]
