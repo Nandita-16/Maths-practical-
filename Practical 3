@@ -1,0 +1,45 @@
+import numpy as np
+NR = int(input("Enter the number of rows:"))
+NC = int(input("Enter the number of columns:"))
+print("Enter the entries in a single line (separated by space): ")
+entries = list(map(int, input().split()))
+A = np.array(entries).reshape(NR, NC)
+print("Matrix X is as follows:", '\n', A)
+A_Inverse = np.linalg.inv(A)
+Transpose_of_A_Inverse = np.transpose(A_Inverse)
+Determinant_of_A = np.linalg.det(A)
+Cofactor_of_A = np.dot(Transpose_of_A_Inverse, Determinant_of_A)
+print("The Cofactor of a Matrix is:", '\n', Cofactor_of_A)
+print("The Determinant of a Matrix is:", '\n', Determinant_of_A)
+Adjoint_of_A = np.transpose(Cofactor_of_A)
+print("The Adjoint of a Matrix is:", '\n', Adjoint_of_A)
+print("The Inverse of a Matrix is:", '\n', A_Inverse)
+
+OUTPUT 
+Enter the number of rows:3
+Enter the number of columns:3
+Enter the entries in a single line (separated by space):
+4 2 1  0 5 3  2 1 6
+
+Matrix X is as follows:
+[[4 2 1]
+ [0 5 3]
+ [2 1 6]]
+
+The Cofactor of a Matrix is:
+[[ 27.  -4.  -5.]
+ [ -6.  22.  -7.]
+ [  1.  -8.  20.]]
+
+The Determinant of a Matrix is:
+95.00000000000003
+
+The Adjoint of a Matrix is:
+[[ 27.  -6.   1.]
+ [ -4.  22.  -8.]
+ [ -5.  -7.  20.]]
+
+The Inverse of a Matrix is:
+[[ 0.28421053 -0.06315789  0.01052632]
+ [-0.04210526  0.23157895 -0.08421053]
+ [-0.05263158 -0.07368421  0.21052632]]
