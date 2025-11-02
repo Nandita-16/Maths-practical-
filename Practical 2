@@ -1,0 +1,21 @@
+import numpy as np
+NR = int(input("Enter the number of rows:"))
+NC = int(input("Enter the number of columns:"))
+print("Enter the entries in a single line (separated by space): ")
+entries = list(map(int, input().split()))
+matrix = np.array(entries).reshape(NR, NC)
+print("Matrix X is as follows:", '\n', matrix)
+print("The Rank of a Matrix is:", np.linalg.matrix_rank(matrix))
+
+OUTPUT 
+Enter the number of rows:3
+Enter the number of columns:4
+Enter the entries in a single line (separated by space):
+2 4 6 8  1 2 3 4  5 7 9 11
+
+Matrix X is as follows:
+[[ 2  4  6  8]
+ [ 1  2  3  4]
+ [ 5  7  9 11]]
+
+The Rank of a Matrix is: 2
