@@ -1,0 +1,25 @@
+import sympy as sp
+
+vars = input("Enter variables (e.g. x y z): ").split()
+symbols = sp.symbols(' '.join(vars))
+vec = input("Enter vector field components separated by commas: ").split(',')
+F = [sp.sympify(v) for v in vec]
+
+x, y, z = symbols
+curl = [
+    sp.diff(F[2], y) - sp.diff(F[1], z),
+    sp.diff(F[0], z) - sp.diff(F[2], x),
+    sp.diff(F[1], x) - sp.diff(F[0], y)
+]
+
+print("Curl =")
+for c in curl:
+    print(sp.simplify(c))
+OUTPUT 
+Enter variables (e.g. x y z): x y z
+Enter vector field components separated by commas: y*z, x*z, x*y
+
+Curl =
+x - y
+y - z
+z - x
