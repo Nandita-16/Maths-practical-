@@ -1,0 +1,30 @@
+import sympy as sp
+
+vars = input("Enter variables (space-separated, e.g. x y z): ").split()
+symbols = sp.symbols(' '.join(vars))
+f = sp.sympify(input("Enter scalar function f in those variables: "))
+grad = [sp.diff(f, v) for v in symbols]
+print("Gradient:")
+for v, g in zip(symbols, grad):
+    print(f"d/d{v} =", sp.simplify(g))
+if input("Evaluate at a point? (y/n): ").strip().lower() == 'y':
+    vals = list(map(sp.sympify, input(f"Enter values for {vars} separated by spaces: ").split()))
+    subs = {s: val for s, val in zip(symbols, vals)}
+    print("Gradient at point:")
+    for v, g in zip(symbols, grad):
+        print(f"d/d{v} =", sp.N(g.subs(subs)))
+
+OUTPUT 
+Enter variables (space-separated, e.g. x y z): x y
+Enter scalar function f in those variables: x**2 + 3*x*y + y**2
+
+Gradient:
+d/dx = 2*x + 3*y
+d/dy = 3*x + 2*y
+
+Evaluate at a point? (y/n): y
+Enter values for ['x', 'y'] separated by spaces: 1 2
+
+Gradient at point:
+d/dx = 8
+d/dy = 7
