@@ -1,0 +1,30 @@
+from sympy import Matrix
+
+n = int(input("Enter number of vectors: "))
+m = int(input("Enter dimension of each vector: "))
+
+vectors = []
+print("\nEnter vectors one by one:")
+for i in range(n):
+    v = list(map(float, input(f"Vector {i+1}: ").split()))
+    vectors.append(v)
+
+M = Matrix(vectors).T
+orthonormal_basis = M.qr()[0]
+
+print("\nOrthonormal basis:")
+for v in orthonormal_basis.T:
+    print(v)
+
+OUTPUT 
+Enter number of vectors: 3
+Enter dimension of each vector: 3
+
+Enter vectors one by one:
+Vector 1: 1 2 3
+Vector 2: 2 4 6
+Vector 3: 1 1 1
+
+Orthonormal basis:
+Matrix([[1/sqrt(14)], [2/sqrt(14)], [3/sqrt(14)]])
+Matrix([[3/sqrt(14)], [1/sqrt(14)], [-2/sqrt(14)]])
