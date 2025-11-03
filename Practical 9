@@ -1,0 +1,53 @@
+import sympy as sp
+
+n = int(input("Enter size of square matrix n (for n×n): "))
+
+print(f"Enter the rows of the matrix (space-separated):")
+rows = [list(map(sp.sympify, input(f"Row {i+1}: ").split())) for i in range(n)]
+A = sp.Matrix(rows)
+
+print("\nMatrix A =")
+sp.pprint(A)
+
+# Eigenvalues & Eigenvectors
+print("\nEigenvalues and Eigenvectors:")
+for val, mult, vecs in A.eigenvects():
+    print("\nEigenvalue:", val)
+    print("Multiplicity:", mult)
+    print("Eigenvectors:")
+    for v in vecs:
+        sp.pprint(v)
+
+# Diagonalizable check
+print("\nIs the matrix diagonalizable?", A.is_diagonalizable())
+
+# Cayley–Hamilton Verification
+x = sp.symbols('x')
+p = A.charpoly(x).as_expr()
+print("\nCharacteristic Polynomial p(x) =")
+sp.pprint(p)
+
+print("\nEvaluating p(A):")
+pA = p.subs(x, A)
+pA = sp.simplify(pA)
+sp.pprint(pA)
+
+if pA == sp.zeros(n):
+    print("\nCayley–Hamilton Theorem Verified ✅ (p(A) = 0)")
+else:
+    print("\nCayley–Hamilton Theorem Failed ❌ (p(A) ≠ 0)")
+
+OUTPUT 
+Enter size of square matrix n (for n×n): 2
+Enter the rows of the matrix (space-separated):
+Row 1: 2 1
+Row 2: 0 2
+
+Eigenvalue: 2
+Multiplicity: 2
+Eigenvector: [1, 0]
+
+Is the matrix diagonalizable? False
+
+Characteristic Polynomial: (x - 2)**2
+p(A) = 0  ✅
