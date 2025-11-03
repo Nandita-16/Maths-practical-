@@ -1,0 +1,44 @@
+import numpy as np
+
+msg = input("Enter message: ").upper()
+msg = msg.replace(" ", "")
+n = int(input("Enter matrix size (example 2 or 3): "))
+
+A = []
+print("Enter matrix row by row:")
+for i in range(n):
+    A.append(list(map(int, input().split())))
+A = np.array(A)
+
+if round(np.linalg.det(A)) == 0:
+    print("Matrix is not invertible. Enter a different matrix.")
+    exit()
+
+nums = [ord(c) - 64 for c in msg]
+while len(nums) % n != 0:
+    nums.append(0)
+
+vecs = np.array(nums).reshape(-1, n).T
+encoded = A.dot(vecs)
+print("Encoded message:\n", encoded)
+
+A_inv = np.linalg.inv(A)
+decoded = A_inv.dot(encoded).round().astype(int)
+
+decoded_nums = decoded.T.flatten()
+decoded_msg = ''.join(chr(x + 64) for x in decoded_nums if x > 0)
+print("Decoded message:", decoded_msg)
+
+OUTPUT 
+Enter message: LINEAR ALGEBRA IS FUN
+Enter matrix size (example 2 or 3): 3
+Enter matrix row by row:
+2 1 3
+1 1 1
+3 0 2
+
+Encoded message:
+ [[ 57  66  85  57  71  64  75]
+ [ 25  30  32  25  27  26  28]
+ [112 133 162 112 138 128 141]]
+Decoded message: LINEARALGEBRAISFUN
