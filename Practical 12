@@ -1,0 +1,14 @@
+import sympy as sp
+
+vars = input("Enter variables (space-separated, e.g. x y z): ").split()
+symbols = sp.symbols(' '.join(vars))
+vec_input = input("Enter vector field components separated by commas: ").split(',')
+F = [sp.sympify(v) for v in vec_input]
+div = sum(sp.diff(F[i], symbols[i]) for i in range(len(symbols)))
+print("Divergence =", sp.simplify(div))
+
+OUTPUT 
+Enter variables (space-separated, e.g. x y z): x y z
+Enter vector field components separated by commas: x*y, y*z, z*x
+
+Divergence = x + y + z
